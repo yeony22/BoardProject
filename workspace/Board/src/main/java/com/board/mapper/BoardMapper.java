@@ -16,6 +16,8 @@ public interface BoardMapper {
 	public int updateBoard(BoardDTO params);
 
 	public int deleteBoard(Long idx);
+	
+	public int updateNotice(Long idx);
 
 	public List<BoardDTO> selectBoardList();
 

@@ -4,34 +4,34 @@
 <mapper namespace="com.board.mapper.BoardMapper">
 
 	<sql id="boardColumns">
-		  idx
-		, title
-		, content
-		, writer
-		, view_cnt
-		, notice_yn
-		, secret_yn
-		, delete_yn
-		, insert_time
-		, update_time
-		, delete_time
+		idx,
+		title,
+		content,
+		writer,
+		view_cnt,
+		notice_yn,
+		secret_yn,
+		delete_yn,
+		insert_time,
+		update_time,
+		delete_time
 	</sql>
 
 	<insert id="insertBoard" parameterType="BoardDTO">
 		INSERT INTO tb_board (
 			<include refid="boardColumns" />
 		) VALUES (
-			  #{idx}
-			, #{title}
-			, #{content}
-			, #{writer}
-			, 0
-			, IFNULL(#{noticeYn}, 'N')
-			, IFNULL(#{secretYn}, 'N')
-			, 'N'
-			, NOW()
-			, NULL
-			, NULL
+			  #{idx},
+			  #{title},
+			  #{content},
+			  #{writer},
+			  0,
+			  IFNULL(#{noticeYn}, 'N'),
+			  IFNULL(#{secretYn}, 'N'),
+			  'N',
+			  NOW(),
+			  NULL,
+			  NULL
 		)
 	</insert>
 
@@ -49,12 +49,12 @@
 	<update id="updateBoard" parameterType="BoardDTO">
 		UPDATE tb_board
 		SET
-			  update_time = NOW()
-			, title = #{title}
-			, content = #{content}
-			, writer = #{writer}
-			, notice_yn = IFNULL(#{noticeYn}, 'N')
-			, secret_yn = IFNULL(#{secretYn}, 'N')
+			update_time = NOW(),
+			title = #{title},
+			content = #{content},
+			writer = #{writer},
+			notice_yn = IFNULL(#{noticeYn}, 'N'),
+			secret_yn = IFNULL(#{secretYn}, 'N')
 		WHERE
 			idx = #{idx}
 	</update>
@@ -62,8 +62,16 @@
 	<update id="deleteBoard" parameterType="long">
 		UPDATE tb_board
 		SET
-			  delete_yn = 'Y'
-			, delete_time = NOW()
+			delete_yn = 'Y',
+			delete_time = NOW()
+		WHERE
+			idx = #{idx}
+	</update>
+	
+	<update id="updateNotice" parameterType="long">
+		UPDATE tb_board
+		SET
+			notice_yn = 'Y'
 		WHERE
 			idx = #{idx}
 	</update>

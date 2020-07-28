@@ -45,6 +45,20 @@ public class BoardServicelmpl implements BoardService {
 
 		return (queryResult == 1) ? true : false;
 	}
+	
+	@Override
+	public boolean updateNotice(Long idx) {
+		// TODO Auto-generated method stub
+		int queryResult = 0;
+
+		BoardDTO board = boardMapper.selectBoardDetail(idx);
+
+		if (board != null && "N".equals(board.getDeleteYn())) {
+			queryResult = boardMapper.updateNotice(idx);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
 
 	@Override
 	public List<BoardDTO> getBoardList() {
@@ -58,5 +72,7 @@ public class BoardServicelmpl implements BoardService {
 
 		return boardList;
 	}
+
+	
 
 }
