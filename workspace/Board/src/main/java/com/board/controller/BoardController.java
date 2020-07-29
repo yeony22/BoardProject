@@ -10,14 +10,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.board.constant.Method;
 import com.board.domain.BoardDTO;
 import com.board.service.BoardService;
+import com.board.util.UiUtils;
+
 
 @Controller
 public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	private UiUtils uiUtils;
 
 	@GetMapping(value = "/board/write.do")
 	public String openBoardWrite(@RequestParam(value = "idx", required = false) Long idx, Model model) {
@@ -55,12 +59,14 @@ public class BoardController {
 			return "redirect:/board/list.do";
 		}
 		model.addAttribute("board", board);
+		
+		boardService.updateViewCnt(idx); // 게시물 조회수
 
 		return "board/view";
 	}
 	
 	@PostMapping(value = "/board/register.do")
-	public String registerBoard(final BoardDTO params) {
+	public String registerBoard(final BoardDTO params, Model model) {
 		try {
 			boolean isRegistered = boardService.registerBoard(params);
 			if (isRegistered == false) {
@@ -72,9 +78,10 @@ public class BoardController {
 		} catch (Exception e) {
 			// TODO => 시스템에 문제가 발생하였다는 메시지를 전달
 		}
-
+		
+		//return uiUtils.showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/board/list.do", Method.GET, null, model);
 		return "redirect:/board/list.do";
-	}
+	}   
 	
 	
 	@PostMapping(value = "/board/delete.do")

@@ -6,4 +6,8 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.dao.DataAccessException"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
+    <fullyQualifiedTypeName name="com.board.constant.Method"/>
+    <fullyQualifiedTypeName name="com.board.util.UiUtils"/>
+    <fullyQualifiedTypeName name="org.springframework.web.servlet.handler.HandlerInterceptorAdapter"/>
 </qualifiedTypeNameHistroy>
